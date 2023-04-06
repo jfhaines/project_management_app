@@ -1,0 +1,10 @@
+USE project_management_app;
+DROP TABLE IF EXISTS card_users;
+DROP TABLE IF EXISTS card_labels;
+DROP TABLE IF EXISTS card_comments;
+DROP TABLE IF EXISTS card_attachments;
+DROP TABLE IF EXISTS card_checklist_items;
+DROP TABLE IF EXISTS cards;
+DROP TABLE IF EXISTS columns;
+DROP TABLE IF EXISTS boards;
+DROP TABLE IF EXISTS users;
