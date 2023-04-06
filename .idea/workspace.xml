@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8091104d-7294-4f03-a442-67a36ba56df7" name="Changes" comment="" />
+    <list default="true" id="8091104d-7294-4f03-a442-67a36ba56df7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.users/db/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.users/db/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.users/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.users/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.users/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.users/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
