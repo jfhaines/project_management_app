@@ -1,0 +1,14 @@
+output   = "models"
+wipe     = true
+no-tests = true
+add-enum-types = true
+no-context = true
+debug = true
+
+[mysql]
+dbname = "project_management_app"
+host = "localhost"
+port = 3306
+user = "root"
+pass = ""
+sslmode = "false"
