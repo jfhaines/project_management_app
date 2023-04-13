@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS card_attachments;
 CREATE TABLE card_attachments (
   id VARCHAR(40),
   filename VARCHAR(150) NOT NULL,
-  time DATETIME NOT NULL,
+  datetime TIMESTAMP NOT NULL,
   card_id VARCHAR(40) NOT NULL,
   user_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (card_id) REFERENCES cards(id),

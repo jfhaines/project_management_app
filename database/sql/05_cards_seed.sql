@@ -5,7 +5,7 @@ CREATE TABLE cards (
   id VARCHAR(40),
   title VARCHAR(200) NOT NULL,
   description VARCHAR(1500),
-  date_due DATE,
+  due_at TIMESTAMP,
   column_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (column_id) REFERENCES columns(id),
   PRIMARY KEY (id)

@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS card_comments;
 CREATE TABLE card_comments (
   id VARCHAR(40),
   text VARCHAR(1000) NOT NULL,
-  time DATETIME NOT NULL,
+  datetime TIMESTAMP NOT NULL,
   user_id VARCHAR(40) NOT NULL,
   card_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
