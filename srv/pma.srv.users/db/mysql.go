@@ -2,40 +2,49 @@ package mysql
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"github.com/jfhaines/project_management_app/database/models"
 	users "github.com/jfhaines/project_management_app/srv/pma.srv.users/proto"
 	"github.com/volatiletech/sqlboiler/v4/boil"
+	"github.com/volatiletech/sqlboiler/v4/queries/qm"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+	"strconv"
 )
 
 type DB struct {
-	db sql.DB
+	db *sql.DB
 }
 
-func CreateUsersDB(db sql.DB) DB {
-	return DB{db}
+func CreateUsersDB(db *sql.DB) *DB {
+	return &DB{db}
 }
 
 type UsersDB interface {
 	GetUser(id string) (*users.User, error)
-	ListUsers() (*[]users.User, error)
-	CreateUser(*users.User) error
-	EditUser(*users.User) error
+	ListUsers() ([]*users.User, error)
+	CreateUser(*users.User) (*users.User, error)
+	EditUser(*users.User) (*users.User, error)
 	DeleteUser(id string) error
 }
 
 func (d *DB) GetUser(id string) (*users.User, error) {
-	result, err := models.FindUser(d.db, id)
+	user, err := models.Users(qm.Where("id=", id)).One(d.db)
 
 	if err != nil {
-		return nil, err
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, status.Error(codes.NotFound, fmt.Sprintf("User with ID %s does not exist", id))
+		} else {
+			return nil, status.Error(codes.Internal, "Unable to retrieve user")
+		}
 	}
 
 	return &users.User{
-		Id:       result.ID,
-		Username: result.Username,
-		Password: result.Password,
-		Email:    result.Email,
+		Id:       strconv.Itoa(user.ID),
+		Username: user.Username,
+		Password: user.Password,
+		Email:    user.Email,
 	}, nil
 }
 
@@ -43,14 +52,14 @@ func (d *DB) ListUsers() ([]*users.User, error) {
 	result, err := models.Users().All(d.db)
 
 	if err != nil {
-		return nil, err
+		return nil, status.Error(codes.Internal, "Unable to retrieve users")
 	}
 
 	var fetchedUsers []*users.User
 
 	for _, u := range result {
 		user := &users.User{
-			Id:       u.ID,
+			Id:       strconv.Itoa(u.ID),
 			Username: u.Username,
 			Password: u.Password,
 			Email:    u.Email,
@@ -61,41 +70,67 @@ func (d *DB) ListUsers() ([]*users.User, error) {
 	return fetchedUsers, nil
 }
 
-func (d *db) CreateUser(u *users.User) error {
+func (d *DB) CreateUser(u *users.User) (*users.User, error) {
 	newUser := models.User{
-		ID:       u.Id,
 		Username: u.Username,
 		Password: u.Password,
 		Email:    u.Email,
 	}
 
 	err := newUser.Insert(d.db, boil.Infer())
-
 	if err != nil {
-		return err
-	} else {
-		return nil
+		return nil, status.Error(codes.Internal, "Unable to create new user")
 	}
+
+	u.Id = strconv.Itoa(newUser.ID)
+
+	return u, nil
 }
 
-func (d *db) EditUser(u *users.User) error {
-	user, err := models.FindUser(d.db, u.Id)
+func (d *DB) EditUser(u *users.User) (*users.User, error) {
+	user, err := models.Users(qm.Where("id=", u.Id)).One(d.db)
 
 	if err != nil {
-		return err
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, status.Error(codes.NotFound, fmt.Sprintf("User with ID %s does not exist", u.Id))
+		} else {
+			return nil, status.Error(codes.Internal, err.Error())
+		}
 	}
 
 	user.Username = u.Username
 	user.Password = u.Password
 	user.Email = u.Email
 
-	rowsAffected, err := user.Update(d.db, boil.Infer())
+	rowsAff, err := user.Update(d.db, boil.Infer())
 
-	if rowsAffected == 0 {
-		return errors.New(fmt.Sprintf("User with ID %s not found, no update occurred.", u.Id))
-	} else if err != nil {
-		return err
-	} else {
-		return nil
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	} else if rowsAff == 0 {
+		return nil, status.Error(codes.Internal, "Failed to update user record")
 	}
+
+	return u, nil
+}
+
+func (d *DB) DeleteUser(id string) error {
+	user, err := models.Users(qm.Where("id=", id)).One(d.db)
+
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return status.Error(codes.NotFound, fmt.Sprintf("User with ID %s does not exist", id))
+		} else {
+			return status.Error(codes.Internal, err.Error())
+		}
+	}
+
+	rowsAff, err := user.Delete(d.db)
+
+	if err != nil {
+		return status.Error(codes.Internal, err.Error())
+	} else if rowsAff == 0 {
+		return status.Error(codes.Internal, "Failed to delete user record")
+	}
+
+	return nil
 }

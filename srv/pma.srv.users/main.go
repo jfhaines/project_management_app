@@ -3,9 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	config "github.com/jfhaines/project_management_app/srv/pma.srv.users/config"
+	"github.com/jfhaines/project_management_app/srv/pma.srv.users/config"
 	mysql "github.com/jfhaines/project_management_app/srv/pma.srv.users/db"
 	pb "github.com/jfhaines/project_management_app/srv/pma.srv.users/proto"
+	service "github.com/jfhaines/project_management_app/srv/pma.srv.users/service"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -28,14 +29,13 @@ func main() {
 
 	err = db.Ping()
 	if err != nil {
-		fmt.Printf("Error: cannot connect to database\n%v", err)
-		return
+		panic(fmt.Sprintf("Error: cannot connect to database\n%v", err))
 	}
 
-	usersDb := mysql.CreateUsersDb(db)
+	usersDb := mysql.CreateUsersDB(db)
 	usersService := service.CreateUsersService(usersDb)
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", config.SERVICE_PORT))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", config.SERVICE_PORT))
 
 	s := grpc.NewServer()
 	pb.RegisterUsersServiceServer(s, &usersService)
