@@ -2,10 +2,10 @@ USE project_management_app;
 DROP TABLE IF EXISTS card_labels;
 
 CREATE TABLE card_labels (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   text VARCHAR(20) NOT NULL,
   colour VARCHAR(30) NOT NULL,
-  card_id INTEGER NOT NULL,
+  card_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (card_id) REFERENCES cards(id),
   PRIMARY KEY (id)
 );

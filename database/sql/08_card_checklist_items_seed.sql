@@ -2,10 +2,10 @@ USE project_management_app;
 DROP TABLE IF EXISTS card_checklist_items;
 
 CREATE TABLE card_checklist_items (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   text VARCHAR(20) NOT NULL,
   position INTEGER NOT NULL,
-  card_id INTEGER NOT NULL,
+  card_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (card_id) REFERENCES cards(id),
   PRIMARY KEY (id)
 );

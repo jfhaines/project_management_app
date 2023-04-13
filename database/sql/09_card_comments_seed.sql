@@ -2,11 +2,11 @@ USE project_management_app;
 DROP TABLE IF EXISTS card_comments;
 
 CREATE TABLE card_comments (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   text VARCHAR(1000) NOT NULL,
   time DATETIME NOT NULL,
-  user_id INTEGER NOT NULL,
-  card_id INTEGER NOT NULL,
+  user_id VARCHAR(40) NOT NULL,
+  card_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (card_id) REFERENCES cards(id),
   PRIMARY KEY (id)

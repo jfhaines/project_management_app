@@ -2,9 +2,9 @@ USE project_management_app;
 DROP TABLE IF EXISTS columns;
 
 CREATE TABLE columns (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   name VARCHAR(60) NOT NULL,
-  board_id INTEGER NOT NULL,
+  board_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (board_id) REFERENCES boards(id),
   PRIMARY KEY (id)
 );

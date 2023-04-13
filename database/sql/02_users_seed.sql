@@ -2,7 +2,7 @@ USE project_management_app;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   username VARCHAR(60) NOT NULL,
   email VARCHAR(120) NOT NULL,
   password VARCHAR(70) NOT NULL,

@@ -2,11 +2,11 @@ USE project_management_app;
 DROP TABLE IF EXISTS card_attachments;
 
 CREATE TABLE card_attachments (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   filename VARCHAR(150) NOT NULL,
   time DATETIME NOT NULL,
-  card_id INTEGER NOT NULL,
-  user_id INTEGER NOT NULL,
+  card_id VARCHAR(40) NOT NULL,
+  user_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (card_id) REFERENCES cards(id),
   FOREIGN KEY (user_id) REFERENCES users(id),
   PRIMARY KEY (id)

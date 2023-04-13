@@ -2,11 +2,11 @@ USE project_management_app;
 DROP TABLE IF EXISTS cards;
 
 CREATE TABLE cards (
-  id INTEGER AUTO_INCREMENT,
+  id VARCHAR(40),
   title VARCHAR(200) NOT NULL,
   description VARCHAR(1500),
   date_due DATE,
-  column_id INTEGER NOT NULL,
+  column_id VARCHAR(40) NOT NULL,
   FOREIGN KEY (column_id) REFERENCES columns(id),
   PRIMARY KEY (id)
 );

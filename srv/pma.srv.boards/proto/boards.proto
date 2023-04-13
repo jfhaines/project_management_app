@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package boards;
+
+option go_package = "/boards";
+
+service BoardsService {
+  rpc GetBoard(GetBoardRequest) returns (GetBoardResponse) {}
+  rpc ListBoards(ListBoardsRequest) returns (ListBoardsResponse) {}
+  rpc CreateBoard(CreateBoardRequest) returns (CreateBoardResponse) {}
+  rpc EditBoard(EditBoardRequest) returns (EditBoardResponse) {}
+  rpc DeleteBoard(DeleteBoardRequest) returns (DeleteBoardResponse) {}
+
+  rpc GetColumn(GetColumnRequest) returns (GetColumnResponse) {}
+  rpc ListColumns(ListColumnsRequest) returns (ListColumnsResponse) {}
+  rpc CreateColumn(CreateColumnRequest) returns (CreateColumnResponse) {}
+  rpc EditColumn(EditColumnRequest) returns (EditColumnResponse) {}
+  rpc DeleteColumn(DeleteColumnRequest) returns (DeleteColumnResponse) {}
+
+  rpc GetCard(GetCardRequest) returns (GetCardResponse) {}
+  rpc ListCards(ListCardsRequest) returns (ListCardsResponse) {}
+  rpc CreateCard(CreateCardRequest) returns (CreateCardResponse) {}
+  rpc EditCard(EditCardRequest) returns (EditCardResponse) {}
+  rpc DeleteCard(DeleteCardRequest) returns (DeleteCardResponse) {}
+
+  rpc GetCardUser(GetCardUserRequest) returns (GetCardUserResponse) {}
+  rpc ListCardUsers(ListCardUsersRequest) returns (ListCardUsersResponse) {}
+  rpc CreateCardUser(CreateCardUserRequest) returns (CreateCardUserResponse) {}
+  rpc EditCardUser(EditCardUserRequest) returns (EditCardUserResponse) {}
+  rpc DeleteCardUser(DeleteCardUserRequest) returns (DeleteCardUserResponse) {}
+
+  rpc GetCardLabel(GetCardLabelRequest) returns (GetCardLabelResponse) {}
+  rpc ListCardLabels(ListCardLabelsRequest) returns (ListCardLabelsResponse) {}
+  rpc CreateCardLabel(CreateCardLabelRequest) returns (CreateCardLabelResponse) {}
+  rpc EditCardLabel(EditCardLabelRequest) returns (EditCardLabelResponse) {}
+  rpc DeleteCardLabel(DeleteCardLabelRequest) returns (DeleteCardLabelResponse) {}
+
+  rpc GetCardComment(GetCardCommentRequest) returns (GetCardCommentResponse) {}
+  rpc ListCardComments(ListCardCommentsRequest) returns (ListCardCommentsResponse) {}
+  rpc CreateCardComment(CreateCardCommentRequest) returns (CreateCardCommentResponse) {}
+  rpc EditCardComment(EditCardCommentRequest) returns (EditCardCommentResponse) {}
+  rpc DeleteCardComment(DeleteCardCommentRequest) returns (DeleteCardCommentResponse) {}
+
+  rpc GetCardChecklistItem(GetCardChecklistItemRequest) returns (GetCardChecklistItemResponse) {}
+  rpc ListCardChecklistItems(ListCardChecklistItemsRequest) returns (ListCardChecklistItemsResponse) {}
+  rpc CreateCardChecklistItem(CreateCardChecklistItemRequest) returns (CreateCardChecklistItemResponse) {}
+  rpc EditCardChecklistItem(EditCardChecklistItemRequest) returns (EditCardChecklistItemResponse) {}
+  rpc DeleteCardChecklistItem(DeleteCardChecklistItemRequest) returns (DeleteCardChecklistItemResponse) {}
+
+  rpc GetCardAttachment(GetCardAttachmentRequest) returns (GetCardAttachmentResponse) {}
+  rpc ListCardAttachments(ListCardAttachmentsRequest) returns (ListCardAttachmentsResponse) {}
+  rpc CreateCardAttachment(CreateCardAttachmentRequest) returns (CreateCardAttachmentResponse) {}
+  rpc EditCardAttachment(EditCardAttachmentRequest) returns (EditCardAttachmentResponse) {}
+  rpc DeleteCardAttachment(DeleteCardAttachmentRequest) returns (DeleteCardAttachmentResponse) {}
+}
+
+message Board {
+  string id = 1;
+  string name = 2;
+  string background = 3;
+}
