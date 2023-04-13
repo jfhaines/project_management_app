@@ -4,6 +4,8 @@ package boards;
 
 option go_package = "/boards";
 
+import "google/protobuf/timestamp.proto";
+
 service BoardsService {
   rpc GetBoard(GetBoardRequest) returns (GetBoardResponse) {}
   rpc ListBoards(ListBoardsRequest) returns (ListBoardsResponse) {}
@@ -54,8 +56,454 @@ service BoardsService {
   rpc DeleteCardAttachment(DeleteCardAttachmentRequest) returns (DeleteCardAttachmentResponse) {}
 }
 
+
+
+
 message Board {
   string id = 1;
   string name = 2;
   string background = 3;
+}
+
+message GetBoardRequest {
+  string id = 1;
+}
+
+message GetBoardResponse {
+  Board board = 1;
+}
+
+message ListBoardsRequest {
+
+}
+
+message ListBoardsResponse {
+  repeated Board boards = 1;
+}
+
+message CreateBoardRequest {
+  string name = 1;
+  string background = 2;
+}
+
+message CreateBoardResponse {
+  Board board = 1;
+}
+
+message EditBoardRequest {
+  string id = 1;
+  string name = 2;
+  string background = 3;
+}
+
+message EditBoardResponse {
+  Board board = 1;
+}
+
+message DeleteBoardRequest {
+  string id = 1;
+}
+
+message DeleteBoardResponse {
+
+}
+
+
+
+
+
+message Column {
+  string id = 1;
+  string name = 2;
+  string board_id = 3;
+}
+
+message GetColumnRequest {
+  string id = 1;
+}
+
+message GetColumnResponse {
+  Column column = 1;
+}
+
+message ListColumnsRequest {
+  string board_id = 1;
+}
+
+message ListColumnsResponse {
+  repeated Column columns = 1;
+}
+
+message CreateColumnRequest {
+  string name = 1;
+  string board_id = 2;
+}
+
+message CreateColumnResponse {
+  Column column = 1;
+}
+
+message EditColumnRequest {
+  string id = 1;
+  string name = 2;
+  string board_id = 3;
+}
+
+message EditColumnResponse {
+  Column column = 1;
+}
+
+message DeleteColumnRequest {
+  string id = 1;
+}
+
+message DeleteColumnResponse {
+
+}
+
+
+
+
+
+message Card {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp due_at = 4;
+  string column_id = 5;
+}
+
+message GetCardRequest {
+  string id = 1;
+}
+
+message GetCardResponse {
+  Card card = 1;
+}
+
+message ListCardsRequest {
+  string board_id = 1;
+}
+
+message ListCardsResponse {
+  repeated Card cards = 1;
+}
+
+message CreateCardRequest {
+  string title = 1;
+  string description = 2;
+  google.protobuf.Timestamp due_at = 3;
+  string column_id = 4;
+}
+
+message CreateCardResponse {
+  Card card = 1;
+}
+
+message EditCardRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp due_at = 4;
+  string column_id = 5;
+}
+
+message EditCardResponse {
+  Card card = 1;
+}
+
+message DeleteCardRequest {
+  string id = 1;
+}
+
+message DeleteCardResponse {
+
+}
+
+
+
+
+
+
+message CardUser {
+  string id = 1;
+  string user_id = 2;
+  string card_id = 3;
+}
+
+message GetCardUserRequest {
+  string id = 1;
+}
+
+message GetCardUserResponse {
+  CardUser card_user = 1;
+}
+
+message ListCardUsersRequest {
+  string card_id = 1;
+}
+
+message ListCardUsersResponse {
+  repeated CardUser card_users = 1;
+}
+
+message CreateCardUserRequest {
+  string user_id = 1;
+  string card_id = 2;
+}
+
+message CreateCardUserResponse {
+  CardUser card_user = 1;
+}
+
+message EditCardUserRequest {
+  string id = 1;
+  string user_id = 2;
+  string card_id = 3;
+}
+
+message EditCardUserResponse {
+  CardUser card_user = 1;
+}
+
+
+message DeleteCardUserRequest {
+  string id = 1;
+}
+
+message DeleteCardUserResponse {
+
+}
+
+
+
+
+
+message CardLabel {
+  string id = 1;
+  string text = 2;
+  string colour = 3;
+  string card_id = 4;
+}
+
+message GetCardLabelRequest {
+  string id = 1;
+}
+
+message GetCardLabelResponse {
+  CardLabel card_label = 1;
+}
+
+message ListCardLabelsRequest {
+  string card_id = 1;
+}
+
+message ListCardLabelsResponse {
+  repeated CardLabel card_labels = 1;
+}
+
+message CreateCardLabelRequest {
+  string text = 1;
+  string colour = 2;
+  string card_id = 3;
+}
+
+message CreateCardLabelResponse {
+  CardLabel card_label = 1;
+}
+
+message EditCardLabelRequest {
+  string id = 1;
+  string text = 2;
+  string colour = 3;
+  string card_id = 4;
+}
+
+message EditCardLabelResponse {
+  CardLabel card_label = 1;
+}
+
+message DeleteCardLabelRequest {
+  string id = 1;
+}
+
+message DeleteCardLabelResponse {
+
+}
+
+
+
+
+
+
+message CardComment {
+  string id = 1;
+  string text = 2;
+  google.protobuf.Timestamp datetime = 3;
+  string user_id = 4;
+  string card_id = 5;
+}
+
+message GetCardCommentRequest {
+  string id = 1;
+}
+
+message GetCardCommentResponse {
+  CardComment card_comment = 1;
+}
+
+message ListCardCommentsRequest {
+  string card_id = 1;
+}
+
+message ListCardCommentsResponse {
+  repeated CardComment card_comments = 1;
+}
+
+message CreateCardCommentRequest {
+  string text = 1;
+  google.protobuf.Timestamp datetime = 2;
+  string user_id = 3;
+  string card_id = 4;
+}
+
+message CreateCardCommentResponse {
+  CardComment card_comment = 1;
+}
+
+message EditCardCommentRequest {
+  string id = 1;
+  string text = 2;
+  google.protobuf.Timestamp datetime = 3;
+  string user_id = 4;
+  string card_id = 5;
+}
+
+message EditCardCommentResponse {
+  CardComment card_comment = 1;
+}
+
+message DeleteCardCommentRequest {
+  string id = 1;
+}
+
+message DeleteCardCommentResponse {
+
+}
+
+
+
+
+
+
+message CardChecklistItem {
+  string id = 1;
+  string text = 2;
+  int32 position = 3;
+  string card_id = 4;
+}
+
+message GetCardChecklistItemRequest {
+  string id = 1;
+}
+
+message GetCardChecklistItemResponse {
+  CardChecklistItem card_checklist_item = 1;
+}
+
+message ListCardChecklistItemsRequest {
+  string card_id = 1;
+}
+
+message ListCardChecklistItemsResponse {
+  repeated CardChecklistItem card_checklist_items = 1;
+}
+
+message CreateCardChecklistItemRequest {
+  string text = 1;
+  int32 position = 2;
+  string card_id = 3;
+}
+
+message CreateCardChecklistItemResponse {
+  CardChecklistItem card_checklist_item = 1;
+}
+
+message EditCardChecklistItemRequest {
+  string id = 1;
+  string text = 2;
+  int32 position = 3;
+  string card_id = 4;
+}
+
+message EditCardChecklistItemResponse {
+  CardChecklistItem card_checklist_item = 1;
+}
+
+message DeleteCardChecklistItemRequest {
+  string id = 1;
+}
+
+message DeleteCardChecklistItemResponse {
+
+}
+
+
+
+
+
+
+message CardAttachment {
+  string id = 1;
+  string filename = 2;
+  google.protobuf.Timestamp datetime = 3;
+  string card_id = 4;
+  string user_id = 5;
+}
+
+message GetCardAttachmentRequest {
+  string id = 1;
+}
+
+message GetCardAttachmentResponse {
+    CardAttachment card_attachment = 1;
+}
+
+message ListCardAttachmentsRequest {
+  string card_id = 1;
+}
+
+message ListCardAttachmentsResponse {
+  repeated CardAttachment card_attachments = 1;
+}
+
+message CreateCardAttachmentRequest {
+  string filename = 1;
+  google.protobuf.Timestamp datetime = 2;
+  string card_id = 3;
+  string user_id = 4;
+}
+
+message CreateCardAttachmentResponse {
+  CardAttachment card_attachment = 1;
+}
+
+message EditCardAttachmentRequest {
+  string id = 1;
+  string filename = 2;
+  google.protobuf.Timestamp datetime = 3;
+  string card_id = 4;
+  string user_id = 5;
+}
+
+message EditCardAttachmentResponse {
+  CardAttachment card_attachment = 1;
+}
+
+message DeleteCardAttachmentRequest {
+  string id = 1;
+}
+
+message DeleteCardAttachmentResponse {
+
 }

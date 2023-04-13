@@ -8,18 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8091104d-7294-4f03-a442-67a36ba56df7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/02_users_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/02_users_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/03_boards_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/03_boards_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/04_columns_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/04_columns_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/05_cards_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/05_cards_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/06_card_users_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/06_card_users_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/07_card_attachments_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/07_card_attachments_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/08_card_checklist_items_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/08_card_checklist_items_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/09_card_comments_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/09_card_comments_seed.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sql/10_card_labels_seed.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/sql/10_card_labels_seed.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.boards/proto/boards.proto" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.boards/proto/boards.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.users/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.users/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.users/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.users/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/pma.srv.users/proto/users_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/srv/pma.srv.users/proto/users_grpc.pb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +56,11 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="go build /Users/joe.haines/Documents/projects/project_management_app/srv/pma.srv.users" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+    <configuration name="go build github.com/jfhaines/project_management_app/srv/pma.srv.users" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="project_management_app" />
       <working_directory value="$PROJECT_DIR$/srv/pma.srv.users" />
       <kind value="PACKAGE" />
-      <package value="$PROJECT_DIR$/srv/pma.srv.users" />
+      <package value="github.com/jfhaines/project_management_app/srv/pma.srv.users" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />

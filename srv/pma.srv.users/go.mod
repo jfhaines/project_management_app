@@ -3,13 +3,14 @@ module github.com/jfhaines/project_management_app/srv/pma.srv.users
 go 1.19
 
 require (
-	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-sql-driver/mysql v1.7.0
 	github.com/google/uuid v1.3.0
-	github.com/jfhaines/project_management_app v0.0.0-20230412012612-92df003ac372
 	github.com/volatiletech/sqlboiler/v4 v4.14.2
 	google.golang.org/grpc v1.46.2
 	google.golang.org/protobuf v1.28.0
 )
+
+require github.com/jfhaines/project_management_app/database v0.0.0-20230413043417-10197fd8b6ae
 
 require (
 	github.com/friendsofgo/errors v0.9.2 // indirect
