@@ -91,6 +91,7 @@ type UsersServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	EditUser(context.Context, *EditUserRequest) (*EditUserResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	mustEmbedUnimplementedUsersServiceServer()
 }
 
 // UnimplementedUsersServiceServer must be embedded to have forward compatible implementations.

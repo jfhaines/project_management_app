@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"github.com/google/uuid"
 	db "github.com/jfhaines/project_management_app/srv/pma.srv.users/db"
 	pb "github.com/jfhaines/project_management_app/srv/pma.srv.users/proto"
 )
@@ -44,6 +45,7 @@ func (s *Service) ListUsers(ctx context.Context, req *pb.ListUsersRequest) (*pb.
 
 func (s *Service) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
 	user := pb.User{
+		Id:       uuid.New().String(),
 		Username: req.Username,
 		Password: req.Password,
 		Email:    req.Email,

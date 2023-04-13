@@ -7,10 +7,8 @@ import (
 	"github.com/jfhaines/project_management_app/database/models"
 	users "github.com/jfhaines/project_management_app/srv/pma.srv.users/proto"
 	"github.com/volatiletech/sqlboiler/v4/boil"
-	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"strconv"
 )
 
 type DB struct {
@@ -30,18 +28,18 @@ type UsersDB interface {
 }
 
 func (d *DB) GetUser(id string) (*users.User, error) {
-	user, err := models.Users(qm.Where("id=", id)).One(d.db)
-
+	user, err := models.FindUser(d.db, id)
+	fmt.Println("hi")
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, status.Error(codes.NotFound, fmt.Sprintf("User with ID %s does not exist", id))
 		} else {
-			return nil, status.Error(codes.Internal, "Unable to retrieve user")
+			return nil, status.Error(codes.Internal, err.Error())
 		}
 	}
 
 	return &users.User{
-		Id:       strconv.Itoa(user.ID),
+		Id:       user.ID,
 		Username: user.Username,
 		Password: user.Password,
 		Email:    user.Email,
@@ -59,7 +57,7 @@ func (d *DB) ListUsers() ([]*users.User, error) {
 
 	for _, u := range result {
 		user := &users.User{
-			Id:       strconv.Itoa(u.ID),
+			Id:       u.ID,
 			Username: u.Username,
 			Password: u.Password,
 			Email:    u.Email,
@@ -72,6 +70,7 @@ func (d *DB) ListUsers() ([]*users.User, error) {
 
 func (d *DB) CreateUser(u *users.User) (*users.User, error) {
 	newUser := models.User{
+		ID:       u.Id,
 		Username: u.Username,
 		Password: u.Password,
 		Email:    u.Email,
@@ -82,13 +81,13 @@ func (d *DB) CreateUser(u *users.User) (*users.User, error) {
 		return nil, status.Error(codes.Internal, "Unable to create new user")
 	}
 
-	u.Id = strconv.Itoa(newUser.ID)
+	u.Id = newUser.ID
 
 	return u, nil
 }
 
 func (d *DB) EditUser(u *users.User) (*users.User, error) {
-	user, err := models.Users(qm.Where("id=", u.Id)).One(d.db)
+	user, err := models.FindUser(d.db, u.Id)
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -114,7 +113,7 @@ func (d *DB) EditUser(u *users.User) (*users.User, error) {
 }
 
 func (d *DB) DeleteUser(id string) error {
-	user, err := models.Users(qm.Where("id=", id)).One(d.db)
+	user, err := models.FindUser(d.db, id)
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {

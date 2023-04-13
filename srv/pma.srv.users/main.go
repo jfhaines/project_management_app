@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jfhaines/project_management_app/srv/pma.srv.users/config"
 	mysql "github.com/jfhaines/project_management_app/srv/pma.srv.users/db"
 	pb "github.com/jfhaines/project_management_app/srv/pma.srv.users/proto"
